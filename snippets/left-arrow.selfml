@@ -1,0 +1,8 @@
+(name [left arrow])
+
+(trigger
+    (tab <-))
+
+(only-in source.scala)
+
+(snippet [%{1=""%{2}""} <- %{3=""%{4}""}])

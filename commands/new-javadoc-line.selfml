@@ -1,0 +1,27 @@
+(trigger
+    (key [[shift][enter]]))
+
+(name [new javadoc line])
+
+(only-in comment.block.documentation.scala)
+
+(input selection line)
+
+(output snippet)
+
+(save nothing)
+
+(script [#!/usr/bin/env ruby -wKU
+
+cline = ENV['TM_CURRENT_LINE']
+space = cline.scan(/^\s*/).to_s
+
+chars = cline.chars.to_a
+startColumn = ENV['TM_COLUMN_NUMBER'].to_i-1
+endColumn = cline.chars.count
+
+start = chars.slice(0,startColumn)
+rest  = chars.slice(startColumn, endColumn)
+
+print start
+print "\n" + space + "*\t"+rest.to_s+ "$0"])

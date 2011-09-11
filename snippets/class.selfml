@@ -1,0 +1,10 @@
+(name class)
+
+(trigger
+    (tab class))
+
+(only-in source.scala)
+
+(snippet [class %{1="%{TM_FILENAME/(.*)\.scala/$1/}"}%{2="(%{3})"} %{4="extends %{5="Any"} "}{
+	%{0}
+}])

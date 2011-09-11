@@ -1,0 +1,247 @@
+(root source.scala
+    (include @storage-modifiers)
+    (include @keywords)
+    (include @declarations)
+    (include @inheritance)
+    (include @imports)
+    (include @comments)
+    (include @block-comments)
+    (include @strings)
+    (include @initialization)
+    (include @constants)
+    (include @char-literal)
+    (include @scala-symbol)
+    (include @empty-parentheses)
+    (include @parameter-list)
+    (include @qualifiedClassName)
+    (include @xml-literal))
+
+(collection inheritance
+    (zone
+        (match
+            (regex [(extends|with)\s+([^\s\{\(\[\]]+)]
+                (1 keyword.declaration.scala)
+                (2 entity.other.inherited-class.scala)))))
+
+(collection comments
+    (zone comment.line.double-slash.scala
+        (match
+            (regex [(//).*$\n?]
+                (1 punctuation.definition.comment.scala))))
+    (zone comment.block.empty.scala
+        (match
+            (regex /\*\*/
+                (0 punctuation.definition.comment.scala))))
+    (zone comment.block.documentation.scala
+        (start
+            (regex [(^\s*)?/\*\*]
+                (0 punctuation.definition.comment.scala)))
+        (end
+            (regex [\*/(\s*\n)?]
+                (0 punctuation.definition.comment.scala)))
+        (subzones
+            (zone keyword.other.documentation.scaladoc.scala
+                (match
+                    (regex [(@\w+\s)])))
+            (zone keyword.other.documentation.scaladoc.link.scala
+                (match
+                    (regex [\{@link\s+[^\}]*\}]))))))
+
+(collection declarations
+    (zone
+        (match
+            (regex `(?x)
+						\b(def)\s+
+						(([a-zA-Z$_][a-zA-Z0-9$_]*(_[^a-zA-Z0-9\s]+)?)|``.*``|[^\w\[\(\:\_\s]+)`
+                (1 keyword.declaration.scala)
+                (2 entity.name.function.declaration))))
+    (zone
+        (match
+            (regex `(case)?\b(class|trait|object)\s+([^\s\{\(\[]+)`
+                (3 entity.name.class.declaration)
+                (1 keyword.declaration.scala)
+                (2 keyword.declaration.scala))))
+    (zone
+        (match
+            (regex [\b(type)\s+(([a-zA-Z$_][a-zA-Z0-9$_]*(_[^a-zA-Z0-9\s]+)?)|`.*`)]
+                (1 keyword.declaration.scala)
+                (2 entity.name.type.declaration))))
+    (zone
+        (match
+            (regex [\b(?:(val)|(var))\s+(([a-zA-Z$_][a-zA-Z0-9$_]*(_[^a-zA-Z0-9\s]+)?)|`.*`)?]
+                (3 entity.name.val.declaration)
+                (1 keyword.declaration.stable.scala)
+                (2 keyword.declaration.volatile.scala))))
+    (zone
+        (match
+            (regex `\b(package object)\s+([^\s\{\(\[]+)`
+                (1 keyword.declaration.scala)
+                (2 entity.name.class.declaration))))
+    (zone meta.package.scala
+        (match
+            (regex [\b(package)\s+([\w\.]+)]
+                (1 keyword.other.scoping.scala)
+                (2 entity.name.package.scala)))))
+
+(collection imports
+    (zone meta.import.scala
+        (start
+            (regex [\b(import)\s+]
+                (1 keyword.other.import.scala)))
+        (end
+            (regex [(?<=[\n;])]))
+        (subzones
+            (include @comments)
+            (zone variable.package.scala
+                (match
+                    (regex [([^\s{;.]+)\s*\.\s*])))
+            (zone variable.import.scala
+                (match
+                    (regex [([^\s{;.]+)\s*])))
+            (zone meta.import.selector.scala
+                (start [{])
+                (end [}])
+                (subzones
+                    (zone
+                        (match
+                            (regex [(?x) \s*
+				([^\s.,}]+) \s*
+				(=>) \s*
+				([^\s.,}]+) \s*
+			  ]
+                                (3 variable.import.renamed-to.scala)
+                                (1 variable.import.renamed-from.scala)
+                                (2 keyword.other.arrow.scala))))
+                    (zone variable.import.scala
+                        (match
+                            (regex [([^\s.,}]+)]))))))))
+
+(collection block-comments
+    (zone comment.block.scala
+        (start
+            (regex /\*))
+        (end
+            (regex \*/))
+        (subzones
+            (include @block-comments)
+            (zone
+                (match
+                    (regex [(?x)
+			(?! /\*)
+			(?! \*/)
+		  ]))))))
+
+(collection char-literal
+    (zone constant.character.literal.scala
+        (match
+            (regex '\\?.'))))
+
+(collection storage-modifiers
+    (zone storage.modifier.access
+        (match
+            (regex [\b(private\[\S+\]|protected\[\S+\]|private|protected)\b])))
+    (zone storage.modifier.other
+        (match
+            (list synchronized @volatile abstract final lazy sealed implicit override @transient @native)
+            (boundary.both))))
+
+(collection xml-attribute
+    (zone
+        (match
+            (regex [(\w+)=("[^"]*")]
+                (1 entity.other.attribute-name)
+                (2 string.quoted.double)))))
+
+(collection xml-literal
+    (zone text.xml
+        (start
+            (regex [</?([a-zA-Z0-9]+)]
+                (1 entity.name.tag)))
+        (end
+            (regex /?>))
+        (subzones
+            (include @xml-literal)
+            (include @xml-attribute))))
+
+(collection scala-symbol
+    (zone
+        (match
+            (regex [('\w+)]
+                (1 entity.name.symbol)))))
+
+(collection qualifiedClassName
+    (zone
+        (match
+            (regex [(\b([A-Z][\w]*))]
+                (1 entity.name.class)))))
+
+(collection parameter-list
+    (zone
+        (match
+            (regex [([a-zA-Z$_][a-zA-Z0-9$_]*)\s*:\s*([A-Za-z0-9][\w|_|?|\.]*)?,?]
+                (1 variable.parameter)
+                (2 entity.name.class)))))
+
+(collection keywords
+    (zone keyword.control.flow.jump.scala
+        (match
+            (list return throw)
+            (boundary.both)))
+    (zone keyword.control.flow.scala
+        (match
+            (list else if do while for yield match case)
+            (boundary.both)))
+    (zone keyword.control.exception.scala
+        (match
+            (list catch finally try)
+            (boundary.both))))
+
+(collection initialization
+    (zone
+        (match
+            (regex `\b(new)\s+([^\s\{\(\[]+)`
+                (1 keyword.declaration.scala)
+                (2 entity.name.class)))))
+
+(collection constants
+    (zone constant.language.scala
+        (match
+            (list false null true Nil None)
+            (boundary.both)))
+    (zone constant.numeric.scala
+        (match
+            (regex [\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)([LlFfUuDd]|UL|ul)?\b])))
+    (zone variable.language.scala
+        (match
+            (list this super self)
+            (boundary.both)))
+    (zone storage.type.primitive.scala
+        (match
+            (list Unit Boolean Byte Char Short Int Float Long Double)
+            (boundary.both)))
+    (zone storage.type.scala
+        (match
+            (list String)
+            (boundary.both))))
+
+(collection strings
+    (zone string.quoted.triple.scala
+        (start """)
+        (end
+            (regex ["""(?!")])))
+    (zone string.quoted.double.scala
+        (start
+            (regex [(?<!\\)"]))
+        (end ")
+        (subzones
+            (zone invalid.string.newline
+                (match
+                    (regex \n)))
+            (zone constant.character.escape.scala
+                (match
+                    (regex \\.))))))
+
+(collection empty-parentheses
+    (zone meta.parentheses.scala
+        (match
+            (regex [\(\)]))))

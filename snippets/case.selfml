@@ -1,0 +1,8 @@
+(name case)
+
+(trigger
+    (tab case))
+
+(only-in source.scala)
+
+(snippet [case %{1="_"} => %{0}])

@@ -1,0 +1,8 @@
+(name [shortcut - match])
+
+(trigger
+    (tab m))
+
+(only-in source.scala)
+
+(snippet match)

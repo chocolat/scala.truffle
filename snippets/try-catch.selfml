@@ -1,0 +1,12 @@
+(name try/catch)
+
+(trigger
+    (tab try))
+
+(only-in source.scala)
+
+(snippet [try { 
+  %{1="// ..."}
+} catch {
+  case e: Exception => %{0}
+}])

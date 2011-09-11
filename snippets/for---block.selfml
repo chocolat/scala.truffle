@@ -1,0 +1,10 @@
+(name [for - Block])
+
+(trigger
+    (tab for))
+
+(only-in source.scala)
+
+(snippet [for( %{1} <- %{2="%{3="0"} to %{4="10"}"}) {
+	%{0}
+}])

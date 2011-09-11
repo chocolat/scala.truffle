@@ -1,0 +1,10 @@
+(name method)
+
+(trigger
+    (tab def))
+
+(only-in source.scala)
+
+(snippet [def %{1="method"}%{2="(%{4="arg"}: %{5="Type"})"} = {
+	%{0}
+}])

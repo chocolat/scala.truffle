@@ -1,0 +1,10 @@
+(name [case class])
+
+(trigger
+    (tab [case class]))
+
+(only-in source.scala)
+
+(snippet [case class %{1="%{TM_FILENAME/(.*)\.scala/$1/}"}%{2="(%{3})"} %{4="extends %{5="Any"} "}%{6="{
+  %{7}
+\"}}%{0}])

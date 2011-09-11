@@ -1,0 +1,21 @@
+(trigger
+    (key [[cmd]R]))
+
+(name [Scala REPL: Paste selection])
+
+(only-in source.scala)
+
+(input nothing)
+
+(output nothing)
+
+(save nothing)
+
+(script [SHELL_NAME=${SHELL_NAME:="Textmate Scala REPL"}
+PASTE=$(echo "$TM_SELECTED_TEXT" | sed s/\"/\\\\\"/g)
+osascript << END
+tell application "Terminal"
+  activate
+  do script "$PASTE" in window 1
+end tell
+END])

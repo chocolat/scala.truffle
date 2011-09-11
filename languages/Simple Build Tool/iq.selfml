@@ -1,0 +1,97 @@
+(detector
+    (extension sbt))
+
+(folding
+    (start [/\*\*|\{\s*$])
+    (stop [\*\*/|^\s*\}]))
+
+(in source.scala
+    (shell-variables
+        (TM_COMMENT_START [// ])
+        (TM_COMMENT_START_2 /*)
+        (TM_COMMENT_END_2 */))
+    (comment.line [// ])
+    (comment.block /* */))
+
+(in [source.scala string.quoted]
+    (no-spellchecking))
+
+(in comment.block.documentation.scala
+    (spellchecking))
+
+(in [comment.block.documentation.scala, comment.line.double-slash.scala]
+    (pair `[`
+        `]`
+        (highlight))
+    (pair [(]
+        [)]
+        (highlight))
+    (pair [`]
+        [`]
+        (highlight))
+    (pair "
+        "
+        (highlight))
+    (pair [{]
+        [}]
+        (highlight)))
+
+(in source.scala
+    (pair `[`
+        `]`
+        (highlight))
+    (pair [(]
+        [)]
+        (highlight))
+    (pair [{]
+        [}]
+        (highlight)))
+
+(in source.scala
+    (indentation.decrease [^\s*(\}|\))])
+    (indentation.increase [(^.*(\{[^}]*|\([^)]*)$)]))
+
+(in [source.sbt entity.name.setting.sbt]
+    (symbol-list))
+
+(in [entity.name.function.declaration, entity.name.class.declaration, entity.name.val.declaration, entity.name.type.declaration]
+    (symbol-list))
+
+(in [comment.block.documentation.scala, comment.line.double-slash.scala]
+    (pair `[`
+        `]`
+        (smart-typing))
+    (pair [(]
+        [)]
+        (smart-typing))
+    (pair [`]
+        [`]
+        (smart-typing))
+    (pair "
+        "
+        (smart-typing))
+    (pair [{]
+        [}]
+        (smart-typing)))
+
+(in source.scala
+    (pair '
+        '
+        (smart-typing))
+    (pair `[`
+        `]`
+        (smart-typing))
+    (pair [(]
+        [)]
+        (smart-typing))
+    (pair [`]
+        [`]
+        (smart-typing))
+    (pair "
+        "
+        (smart-typing))
+    (pair [{]
+        [}]
+        (smart-typing)))
+
+(in keyword.other.documentation.scaladoc.scala)

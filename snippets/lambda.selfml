@@ -1,0 +1,8 @@
+(name lambda)
+
+(trigger
+    (tab lam))
+
+(only-in source.scala)
+
+(snippet [(%{1}) => %{2="{%{3}\"}}])

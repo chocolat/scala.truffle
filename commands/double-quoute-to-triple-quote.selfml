@@ -1,0 +1,16 @@
+(trigger
+    (tab "))
+
+(name [Double quoute to triple quote])
+
+(only-in string.quoted.double.scala)
+
+(input selection scope)
+
+(output snippet)
+
+(save nothing)
+
+(script [#!/usr/bin/env ruby -wKU
+
+print '"""${0}"""'])

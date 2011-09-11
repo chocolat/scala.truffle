@@ -1,0 +1,18 @@
+(trigger
+    (key [[ctrl]H])
+    (tab "))
+
+(name [Scala Library Documentation])
+
+(only-in source.scala)
+
+(input selection nothing)
+
+(output html)
+
+(save nothing)
+
+(script [if [[ "${SCALA_DOC}" ]]
+    then echo "<meta http-equiv='Refresh' content='0;URL=file://$SCALA_DOC/api/index.html'>"
+    else echo "<meta http-equiv='Refresh' content='0;URL=http://www.scala-lang.org/api/current/index.html'>"
+fi])

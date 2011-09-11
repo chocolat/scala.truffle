@@ -1,0 +1,8 @@
+(name [shortcut - enumeration])
+
+(trigger
+    (tab enum))
+
+(only-in source.scala)
+
+(snippet enumeration)

@@ -1,0 +1,8 @@
+(name [Quotes in Quotes])
+
+(trigger
+    (key [[shift]"]))
+
+(only-in string.quoted.double.scala)
+
+(snippet ["%{0}"])

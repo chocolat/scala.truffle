@@ -1,0 +1,16 @@
+(root source.sbt
+    (zone
+        (match
+            (regex [(\w*)\s+(?=.*=)]
+                (1 entity.name.setting.sbt))))
+    (zone keyword.sbt
+        (match
+            (list at)
+            (boundary.both)))
+    (zone string.quoted.double.sbt
+        (start ")
+        (end ")
+        (subzones
+            (zone constant.character.escape.untitled
+                (match
+                    (regex \\.))))))

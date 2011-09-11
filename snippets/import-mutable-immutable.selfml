@@ -1,0 +1,8 @@
+(name [import mutable/immutable])
+
+(trigger
+    (tab impc))
+
+(only-in source.scala)
+
+(snippet [import scala.collection.{ mutable, immutable, generic }])

@@ -1,0 +1,8 @@
+(name [shortcut - object])
+
+(trigger
+    (tab obj))
+
+(only-in source.scala)
+
+(snippet object)

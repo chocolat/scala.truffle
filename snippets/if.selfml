@@ -1,0 +1,11 @@
+(name if)
+
+(trigger
+    (tab if))
+
+(only-in source.scala)
+
+(snippet [if(%{1}){
+%{2}
+}
+])

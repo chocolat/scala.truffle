@@ -1,0 +1,10 @@
+(name [Special: Return Inside parentheses])
+
+(trigger
+    (key [[enter]]))
+
+(only-in meta.parentheses.scala)
+
+(snippet [
+	%{0}
+])

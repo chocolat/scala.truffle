@@ -1,0 +1,8 @@
+(name [shortcut - case class])
+
+(trigger
+    (tab cc))
+
+(only-in source.scala)
+
+(snippet [case class])

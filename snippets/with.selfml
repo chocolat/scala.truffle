@@ -1,0 +1,8 @@
+(name with)
+
+(trigger
+    (tab with))
+
+(only-in source.scala)
+
+(snippet [with %{1="Any"}])

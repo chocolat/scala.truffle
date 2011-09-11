@@ -1,0 +1,8 @@
+(name [shortcut - class])
+
+(trigger
+    (tab c))
+
+(only-in source.scala)
+
+(snippet class)

@@ -1,0 +1,9 @@
+(name toString)
+
+(trigger
+    (tab tostr))
+
+(only-in source.scala)
+
+(snippet [override def toString(): String =  %{0} 
+])

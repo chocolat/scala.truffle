@@ -1,0 +1,11 @@
+(name main)
+
+(trigger
+    (tab main))
+
+(only-in source.scala)
+
+(snippet [def main(args: Array[String]): Unit = {
+  %{1}
+}
+])

@@ -1,0 +1,8 @@
+(name [shortcut - trait])
+
+(trigger
+    (tab t))
+
+(only-in source.scala)
+
+(snippet trait)

@@ -1,0 +1,11 @@
+(name match)
+
+(trigger
+    (tab match))
+
+(only-in source.scala)
+
+(snippet [match {
+	case %{1="_"} => %{0}
+}
+])

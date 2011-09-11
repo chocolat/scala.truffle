@@ -1,0 +1,8 @@
+(name println)
+
+(trigger
+    (tab pl))
+
+(only-in source.scala)
+
+(snippet [println(%{0})])
