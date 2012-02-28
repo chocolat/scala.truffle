@@ -1,6 +1,5 @@
 (trigger
-    (key [[ctrl]H])
-    (tab "))
+    (key [[ctrl]H]))
 
 (name [Scala Library Documentation])
 

@@ -4,4 +4,4 @@
     (submenu Control snippet.if snippet.for---block snippet.for---yield snippet.match)
     (submenu Constructs snippet.case-class snippet.case-class-scaffolding snippet.class snippet.enumeration snippet.main snippet.method snippet.object snippet.object-with-main-method snippet.script-header snippet.trait snippet.try-catch snippet.with)
     (submenu Directives snippet.import-mutable-immutable command.package-for-file)
-    (submenu Other snippet.quotes-in-quotes command.scala-library-documentation command.align-assignments command.double-quoute-to-triple-quote snippet.tostring snippet.lambda snippet.right-arrow snippet.left-arrow snippet.case command.new-javadoc-line snippet.println))
+    (submenu Other command.scala-library-documentation command.align-assignments command.double-quoute-to-triple-quote snippet.tostring snippet.lambda snippet.right-arrow snippet.left-arrow snippet.case command.new-javadoc-line snippet.println))
